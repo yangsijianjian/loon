@@ -1,14 +1,11 @@
 #!name=访问私库
 #!desc=允许用户访问自定义的 GitHub/Gist 私有仓库
-#!category=Third Party Module
-
-[Argument]
-arguments=USERNAME:GITHUB_USERNAME,TOKEN:GITHUB_TOKEN
-arguments-desc=[参数设置]\nUSERNAME: 填入GitHub的用户名\nTOKEN: 填入GitHub生成的Token\n\n[Token获取方式]\n头像菜单 -> Settings -> Developer settings -> Personal access tokens -> Generate new token -> 在权限列表中找到并勾选 gist 然后提交生成
+#!author=soya
+#!version=1.0
 
 [Rewrite]
-^https?:\/\/(raw|gist)\.githubusercontent\.com\/GITHUB_USERNAME header-del Authorization
-^https?:\/\/(raw|gist)\.githubusercontent\.com\/GITHUB_USERNAME header-add Authorization "token GITHUB_TOKEN"
+http-request ^https?:\/\/(raw|gist)\.githubusercontent\.com\/你的用户名 header-del Authorization
+http-request ^https?:\/\/(raw|gist)\.githubusercontent\.com\/你的用户名 header-add Authorization = token 你的Token
 
 [MITM]
-hostname = %APPEND% raw.githubusercontent.com, gist.githubusercontent.com
+hostname = raw.githubusercontent.com, gist.githubusercontent.com
