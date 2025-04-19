@@ -6,7 +6,7 @@
 
 [Argument]
 USERNAME=input,"USERNAME",tag=USERNAME,desc=USERNAME
-TOKEN=input,"TOKEN,"tag=TOKEN, desc=TOKEN
+TOKEN=input,"TOKEN",tag=TOKEN, desc=TOKEN
 
 [Rewrite]
 http-request ^https?:\/\/(raw|gist)\.githubusercontent\.com\/[{USERNAME}] header-del Authorization
