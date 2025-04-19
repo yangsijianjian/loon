@@ -5,8 +5,8 @@
 #!homepage=https://t.me/cool_scripts/147
 
 [Argument]
-token=input,"token",tag=token,desc=token
 username=input,"you username",tag=,username,desc=username
+token=input,"token",tag=token,desc=token
 
 [Script]
 http-request ^https?:\/\/(raw|gist)\.githubusercontent.com, requires-body=0, script-path=https://raw.githubusercontent.com/yangsijianjian/loon/refs/heads/main/loon.js, tag=Github Private,,argument=[{token},{username}]
