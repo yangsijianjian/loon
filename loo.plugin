@@ -13,4 +13,4 @@ TOKEN=input,"TOKEN",tag=TOKEN, desc=TOKEN
 ^https?:\/\/(raw|gist)\.githubusercontent\.com\/[{USERNAME}] header-add Authorivzation "token\x20[{TOKEN}]"
 
 [MITM]
-hostname = %APPEND% raw.githubusercontent.com, gist.githubusercontent.com
+hostname = raw.githubusercontent.com, gist.githubusercontent.com
