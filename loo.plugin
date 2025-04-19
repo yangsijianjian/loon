@@ -1,5 +1,5 @@
-访问私库
-允许用户访问自定义的 GitHub/Gist 私有仓库
+#!name=GitHub Private Access
+#!desc=GitHub 访问私有仓库
 
 [Rewrite]
 ^https?:\/\/(raw|gist)\.githubusercontent\.com\/GITHUB_USERNAME header-del Authorization
