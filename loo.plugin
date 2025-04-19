@@ -9,8 +9,8 @@ USERNAME=input,"USERNAME",tag=USERNAME,desc=USERNAME
 TOKEN=input,"TOKEN",tag=TOKEN, desc=TOKEN
 
 [Rewrite]
-http-request ^https?:\/\/(raw|gist)\.githubusercontent\.com\/[{USERNAME}] header-del Authorization
-http-request ^https?:\/\/(raw|gist)\.githubusercontent\.com\/[{USERNAME}] header-add Authorivzation "token [{TOKEN}]"
+^https?:\/\/(raw|gist)\.githubusercontent\.com\/[{USERNAME}] header-del Authorization
+^https?:\/\/(raw|gist)\.githubusercontent\.com\/[{USERNAME}] header-add Authorivzation "token [{TOKEN}]"
 
 [MITM]
 hostname = %APPEND% raw.githubusercontent.com, gist.githubusercontent.com
