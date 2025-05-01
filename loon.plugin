@@ -3,8 +3,8 @@
 #!author=Peng-YM
 
 [Argument]
-username=input,"USERNAME",tag=USERNAME,desc=USERNAME
-token=input,"TOKEN",tag=TOKEN, desc=TOKEN
+username=input,"username",tag=username,desc=username
+token=input,"token",tag=token, desc=toekn
 
 [Script]
 http-request ^https?:\/\/(raw|gist)\.githubusercontent.com, requires-body=0, script-path=https://raw.githubusercontent.com/yangsijianjian/loon/refs/heads/main/loon.js, tag=Github Private,argument=[{username},{token}]
