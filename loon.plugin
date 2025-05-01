@@ -7,7 +7,7 @@ USERNAME=input,"USERNAME",tag=USERNAME,desc=USERNAME
 TOKEN=input,"TOKEN",tag=TOKEN, desc=TOKEN
 
 [Script]
-http-request ^https?:\/\/(raw|gist)\.githubusercontent.com, requires-body=0, script-path=https://raw.githubusercontent.com/yangsijianjian/yangsijian/refs/heads/main/loon/loon.js, tag=Github Private
+http-request ^https?:\/\/(raw|gist)\.githubusercontent.com, requires-body=0, script-path=https://raw.githubusercontent.com/yangsijianjian/yangsijian/refs/heads/main/loon/loon.js, tag=Github Private,argument=[{USERNAME},{TOKEN}]
 
 [MITM]
 hostname = raw.githubusercontent.com, gist.githubusercontent.com
