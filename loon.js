@@ -1,4 +1,4 @@
-console.log("$argument =", $argument);
+console.log("$argument =", JSON.stringify($argument));
 
 const args = Object.fromEntries(
   ($argument || "")
@@ -9,8 +9,6 @@ const args = Object.fromEntries(
       return [key, decodeURIComponent(value.join("="))];
     })
 );
-
-console.log("args =", JSON.stringify(args));
 
 const USERNAME = args.USERNAME || "";
 const TOKEN = args.TOKEN || "";
@@ -28,9 +26,9 @@ if (!match) {
   return;
 }
 
-const username = match[1];
+const requestUsername = match[1];
 
-console.log("Request Username =", username);
+console.log("Request Username =", requestUsername);
 
 if (!USERNAME || !TOKEN) {
   console.log("Missing USERNAME or TOKEN");
@@ -38,18 +36,19 @@ if (!USERNAME || !TOKEN) {
   return;
 }
 
-if (username === USERNAME) {
-  console.log(`ACCESSING PRIVATE REPO: ${username}`);
-
-  const headers = {
-    ...$request.headers,
-    Authorization: `token ${TOKEN}`
-  };
-
-  console.log("Authorization Added");
-
-  $done({ headers });
-} else {
-  console.log(`Skip: ${username}`);
+if (requestUsername !== USERNAME) {
+  console.log(`Skip: ${requestUsername}`);
   $done({});
+  return;
 }
+
+console.log(`ACCESSING PRIVATE REPO: ${requestUsername}`);
+
+const headers = {
+  ...$request.headers,
+  Authorization: `token ${TOKEN}`
+};
+
+console.log("Authorization Added");
+
+$done({ headers });
