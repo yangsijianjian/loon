@@ -1,3 +1,6 @@
+console.log("===START===");
+console.log("$argument =", $argument);
+console.log("$request.url =", $request.url);
 const args = Object.fromEntries(
   ($argument || "")
     .split("&")
