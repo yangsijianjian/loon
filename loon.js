@@ -1,23 +1,18 @@
-const token = $prefs.valueForKey("sliverkiss_github_token");
+const config = JSON.parse(
+  $persistentStore.read("github_private_repo") || "{}"
+);
 
-(async () => {
-    // 构造 Raw URL
-    const req = {
-        url: `https://raw.githubusercontent.com${$request.path}`,
-        method: "GET",
-        headers: {
-            "Authorization": `token ${token}`,
-        }
-    };
+if (!config.token) {
+  console.log("GitHub Token not found");
+  $done({});
+  return;
+}
 
-    $task.fetch(req).then((response) => {
-        $done({
-            status: `HTTP/1.1 200 OK`,
-            headers: {
-                "Content-Type": response.headers["Content-Type"] || "text/plain"
-            },
-            body: response?.body
-        });
-    })
+console.log("GitHub Auth:", $request.url);
 
-})();
+$done({
+  headers: {
+    ...$request.headers,
+    Authorization: `token ${config.token}`
+  }
+});
