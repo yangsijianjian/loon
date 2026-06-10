@@ -6,7 +6,7 @@ USERNAME=input,"",tag=USERNAME,desc=GitHub用户名
 TOKEN=input,"",tag=TOKEN,desc=GitHub Token
 
 [Script]
-http-request ^https:\/\/(raw|gist)\.githubusercontent\.com script-path=https://raw.githubusercontent.com/yangsijianjian/loon/refs/heads/main/loon.js, requires-body=false, timeout=20, argument=USERNAME={{{USERNAME}}}&TOKEN={{{TOKEN}}}, tag=PrivateRepo
+http-request ^https:\/\/(raw|gist)\.githubusercontent\.com script-path=https://raw.githubusercontent.com/yangsijianjian/loon/refs/heads/main/loon.js, requires-body=false, timeout=20, argument=USERNAME={{{USERNAME}}}&TOKEN={{{TOKEN}}}, tag=PrivateRepo argument=USERNAME={{{USERNAME}}}&TOKEN={{{TOKEN}}}, tag=PrivateRepo
 
 [MITM]
 hostname = raw.githubusercontent.com, gist.githubusercontent.com
