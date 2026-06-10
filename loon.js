@@ -9,9 +9,19 @@ if (boxConfig) {
   config = JSON.parse(boxConfig);
 }
 
-const username = $request.url.match(
+const match = $request.url.match(
   /https:\/\/(?:raw|gist)\.githubusercontent\.com\/([^\/]+)\//
-)[1];
+);
+
+console.log("match =", JSON.stringify(match));
+
+if (!match) {
+  console.log("url not match");
+  $done({});
+  return;
+}
+
+const username = match[1];
 // rewrite headers for specific user
 if (username == config.username) {
   console.log(`ACCESSING PRIVATE REPO: ${$request.url}`);
