@@ -1,6 +1,6 @@
 let config = {
-  username: "yangsijianjian", // 用户名
-  token: "", // token
+  username: "${username}", // 用户名
+  token: "${token}", // token
 };
 
 // load user prefs from box
