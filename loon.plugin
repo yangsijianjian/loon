@@ -1,12 +1,12 @@
-#!name=Private
+#!name=Private Repo
 #!desc=访问私有仓库
 
 [Argument]
-USERNAME=input,"USERNAME",tag=USERNAME,desc=USERNAME
-TOKEN=input,"TOKEN",tag=TOKEN, desc=TOKEN
+USERNAME=input,"yangsijianjian",tag=USERNAME,desc=GitHub用户名
+TOKEN=input,"ghp_xxxxxxxxx",tag=TOKEN,desc=GitHub Token
 
 [Script]
-http-request ^https?:\/\/(raw|gist)\.githubusercontent.com, requires-body=0, script-path=https://raw.githubusercontent.com/yangsijianjian/loon/refs/heads/main/loon.js, tag=Private，{TOKEN}，{USERNAME}
+http-request ^https?:\/\/(?:raw|gist)\.githubusercontent\.com script-path=https://raw.githubusercontent.com/yangsijianjian/loon/refs/heads/main/loon.js, requires-body=false, timeout=20, argument=USERNAME={{{USERNAME}}}&TOKEN={{{TOKEN}}}, tag=PrivateRepo
 
 [MITM]
 hostname = raw.githubusercontent.com, gist.githubusercontent.com
