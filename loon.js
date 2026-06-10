@@ -5,8 +5,8 @@ const args = Object.fromEntries(
     .map(i => i.split("="))
 );
 
-const USERNAME = decodeURIComponent(args.USERNAME || "");
-const TOKEN = decodeURIComponent(args.TOKEN || "");
+console.log("argument =", $argument);
+console.log("USERNAME =", args.USERNAME);
+console.log("TOKEN =", args.TOKEN);
 
-console.log("USERNAME:", USERNAME);
-console.log("TOKEN:", TOKEN);
+$done({});
