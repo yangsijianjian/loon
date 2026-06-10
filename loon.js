@@ -5,8 +5,8 @@ const args = Object.fromEntries(
 );
 
 const config = {
-  username: args.USERNAME || "",
-  token: args.TOKEN || ""
+  username: decodeURIComponent(args.USERNAME || ""),
+  token: decodeURIComponent(args.TOKEN || "")
 };
 
 const repoOwner = $request.url.match(
