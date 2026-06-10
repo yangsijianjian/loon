@@ -1,19 +1,25 @@
-let config = {
-  username: `${username}`, // 用户名
-  token: `${token}`, // token
+const args = Object.fromEntries(
+  ($argument || "")
+    .split("&")
+    .map(i => i.split("="))
+);
+
+const config = {
+  username: args.USERNAME || "",
+  token: args.TOKEN || ""
 };
 
-// load user prefs from box
-const boxConfig = $persistentStore.read("github_private_repo");
-if (boxConfig) {
-  config = JSON.parse(boxConfig);
-}
-
-const username = $request.url.match(
+const repoOwner = $request.url.match(
   /https:\/\/(?:raw|gist)\.githubusercontent\.com\/([^\/]+)\//
-)[1];
-// rewrite headers for specific user
-if (username == config.username) {
-  console.log(`ACCESSING PRIVATE REPO: ${$request.url}`);
-  $done({ headers: {...$request.headers, Authorization: `token ${config.token}`} });
-} else $done({});
+)?.[1];
+
+if (repoOwner === config.username) {
+  $done({
+    headers: {
+      ...$request.headers,
+      Authorization: `token ${config.token}`
+    }
+  });
+} else {
+  $done({});
+}
