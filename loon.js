@@ -1,54 +1,21 @@
-console.log("$argument =", JSON.stringify($argument));
+(() => {
+  let args = $argument || {};
+  if (typeof args === "string") {
+    args = Object.fromEntries(new URLSearchParams(args));
+  }
 
-const args = Object.fromEntries(
-  ($argument || "")
-    .split("&")
-    .filter(Boolean)
-    .map(item => {
-      const [key, ...value] = item.split("=");
-      return [key, decodeURIComponent(value.join("="))];
-    })
-);
+  const username = (args.USERNAME || "").trim();
+  const token = (args.TOKEN || "").trim();
 
-const USERNAME = args.USERNAME || "";
-const TOKEN = args.TOKEN || "";
+  if (username && token && $request.url.toLowerCase().includes(username.toLowerCase())) {
+    // 删除可能已存在的大小写不同 authorization 头
+    for (const key of Object.keys($request.headers || {})) {
+      if (key.toLowerCase() === "authorization") {
+        delete $request.headers[key];
+      }
+    }
+    $request.headers["Authorization"] = "token " + token;
+  }
 
-console.log("USERNAME =", USERNAME);
-console.log("TOKEN =", TOKEN ? "FOUND" : "EMPTY");
-
-const match = $request.url.match(
-  /^https:\/\/(?:raw|gist)\.githubusercontent\.com\/([^\/]+)\//
-);
-
-if (!match) {
-  console.log("URL not match");
-  $done({});
-  return;
-}
-
-const requestUsername = match[1];
-
-console.log("Request Username =", requestUsername);
-
-if (!USERNAME || !TOKEN) {
-  console.log("Missing USERNAME or TOKEN");
-  $done({});
-  return;
-}
-
-if (requestUsername !== USERNAME) {
-  console.log(`Skip: ${requestUsername}`);
-  $done({});
-  return;
-}
-
-console.log(`ACCESSING PRIVATE REPO: ${requestUsername}`);
-
-const headers = {
-  ...$request.headers,
-  Authorization: `token ${TOKEN}`
-};
-
-console.log("Authorization Added");
-
-$done({ headers });
+  $done({ headers: $request.headers || {} });
+})();
