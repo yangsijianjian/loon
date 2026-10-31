@@ -1,1 +1,1 @@
-(()=>{const h=$request.headers,a=$argument||{};if(!a.TOKEN)return $done({});h.Authorization="token "+a.TOKEN;$done({headers:h})})();
+(()=>{const a=$argument||{},u=$request.url;if(!a.USERNAME||!a.TOKEN||!u.includes("githubusercontent.com/"))return $done({});const n=u.split("/")[3];if(!n||n.toLowerCase()!=a.USERNAME.toLowerCase())return $done({});const h=$request.headers;h.Authorization="token "+a.TOKEN;$done({headers:h})})();
