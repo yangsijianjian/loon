@@ -5,6 +5,10 @@
 USERNAME = input, "", tag=USERNAME, desc=GitHub用户名
 TOKEN = input, "", tag=TOKEN, desc=GitHub Token
 
+[Rewrite]
+# 解决github速率限制返回429问题
+^https://.*\.githubusercontent\.com\/ header-replace Accept-Language en-us
+
 [Script]
 http-request ^https:\/\/(raw|gist)\.githubusercontent\.com script-path=https://raw.githubusercontent.com/yangsijianjian/loon/refs/heads/main/loon.js, requires-body=false, timeout=20, argument=[{USERNAME},{TOKEN}], tag=PrivateRepo
 
